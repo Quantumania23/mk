@@ -13,15 +13,14 @@ const Footer = () => {
             Built With <span className='text-primary dark:text-primaryDark text-2xl px-1'>&#9825;</span>
             by&nbsp;
             <Link href="https://github.com/quantumania23"
-             className='underline
-            underline-offset-2
-            ' target={"_blank"}
+             className='text-dark underline dark:text-light md:text-base hover:no-underline cursor-pointer'
+            target={"_blank"}
             >Quantumania23
             </Link>
         </div>
         <Link
-        href="https://github.com/quantumania23"
-        className='underline'
+        href="https://www.bbc.com/news/topics/c207p54m4rqt"
+        className='text-dark underline dark:text-light md:text-base hover:no-underline cursor-pointer'
         target={"_blank"}
       >
         Peace

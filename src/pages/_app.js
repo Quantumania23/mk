@@ -1,4 +1,5 @@
 import Footer from '@/Components/Footer';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import Navbar from '@/Components/Navbar';
 import '@/styles/globals.css';
 import { AnimatePresence } from 'framer-motion';
@@ -21,8 +22,9 @@ export default function App({ Component, pageProps }) {
     </Head>
     <main className={`${montserrat.variable} font-mont bg-light dark:bg-dark w-full min-h-screen`}>
       <Navbar />
-      <AnimatePresence mode='wait'>
+      <AnimatePresence mode='sync'>
       <Component key={router.asPath} {...pageProps} />
+      <SpeedInsights/>
       </AnimatePresence>
       <Footer />
     </main>

@@ -102,7 +102,7 @@ const Articles = () => {
   return (
     <>
       <Head>
-        <title>Quantumania23 | Articles Page</title>
+        <title>Mike&apos;s portfolio | Articles Page</title>
         <meta name="description" content="any description" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Layout from "@/Components/Layout";
 import Link from "next/link";
 import { Particles } from "react-tsparticles";
-import Contact from "@/Components/Contact";
+import Contact from "@/Components/Contacts";
 import { LinkArrow } from "@/Components/Icons";
 import Head from "next/head";
 import Image from "next/image";
-import profilePic from "../../public/images/profile/image-75-74-removebg.png";
+import profilePic from "../../public/images/profile/image-75-74-removebg-preview.png";
 import AnimatedText from "@/Components/AnimatedText";
 import HireMe from "@/Components/HireMe";
 import lightBulb from "../../public/images/svgs/bulb.png";
@@ -56,7 +56,7 @@ export default function Home() {
                 className="!text-5xl !text-left xl:!text-5xl lg:!text-center lg:!text-5xl md:!text-4xl sm:!text-3xl"
               />
               <p className="my-4 text-base font-medium md:text-sm sm:text-xs dark:text-light">
-                As a skilled Front-end developer, I am dedicated to turning ideas into innovative web applications. Explore my latest projects and articles, showcasing my expertise in React.js Next.js and web development.
+                As a skilled Front-end developer, I am dedicated to turning ideas into innovative web applications and websites. Explore my latest projects and articles, showcasing my expertise in React.js, Next.js and web development.
               </p>
               <div className="flex items-center self-start mt-2 lg:self-center">
                 <Link
@@ -78,7 +78,7 @@ export default function Home() {
           </div>
         </Layout>
         <HireMe />
-        <div className="absolute right-0 bottom-0 inline-block w-24 -rotate-12 animate-pulse duration-75 z-10">
+        <div className="absolute right-5 bottom-0 inline-block w-24 -rotate-12 animate-pulse duration-75 z-10 md:hidden">
           <Image src={lightBulb} alt="Quantumania23" className="w-full h-auto" />
         </div>
       </main>
