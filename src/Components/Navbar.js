@@ -98,7 +98,7 @@ const Navbar = () => {
           <CustomLink href="/About" title="About" className="mx-2" />
           <CustomLink href="/Projects" title="Projects" className="mx-2" />
           <CustomLink href="/Articles" title="Articles" className="mx-2" />
-          <CustomLink href="/Services" title="Services" className="mx-2" />
+          {/* <CustomLink href="/Services" title="Services" className="mx-2" /> */}
           <CustomLink
             href="/Contact"
             title="Contact"
@@ -201,12 +201,12 @@ bg-dark/90 dark:bg-light/75 rounded-lg backdrop-blur-md py-32">
               className=""
               toggle={handleClick}
             />
-            <CustomMobileLink
+            {/* <CustomMobileLink
               href="/Services"
               title="Services"
               className=""
               toggle={handleClick}
-            />
+            /> */}
             <CustomMobileLink
               href="/Contact"
               title="Contact"
