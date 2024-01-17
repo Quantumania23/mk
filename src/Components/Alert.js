@@ -10,7 +10,7 @@ const Alert = ({ type, text }) => {
         className={`${
           type === "danger" ? "bg-red-800" : "bg-blue-800"
         } p-2 text-indigo-100 leading-none lg:rounded-full
-      flex lg:inline-flex items-center`}
+      flex lg:inline-flex items-center`} 
         role="alert"
       >
         <p

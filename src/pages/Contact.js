@@ -27,8 +27,7 @@ const Contact = () => {
     setisLoading(true);
     setCurrentAnimation("hit");
 
-    emailjs
-      .send(
+    emailjs.send(
         process.env.NEXT_APP_EMAILJS_SERVICE_ID,
         process.env.NEXT_APP_EMAILJS_TEMPLATE_ID,
         {
@@ -38,7 +37,7 @@ const Contact = () => {
           to_email: "mikepeace981@gmail.com",
           message: form.message,
         },
-        process.env.NEXT_APP_EMAILJS_PUBLIC_KEY
+        process.env.NEXT_APP_EMAILJS_PUBLIC_KEY,
       )
       .then(() => {
         setisLoading(false);
@@ -53,8 +52,7 @@ const Contact = () => {
           setCurrentAnimation("idle");
           setForm({ name: "", email: "", message: "" });
         }, [3000]);
-      })
-      .catch((error) => {
+      }).catch((error) => {
         setisLoading(false);
         setCurrentAnimation("idle");
         console.log(error);
@@ -87,11 +85,11 @@ const Contact = () => {
             text="Transforming ideas into digital reality."
             className="mb-16 !text-6xl lg:!text-5xl sm:!text-4xl xs:!text-3xl sm:mb-8"
           />
-          <section className="relative flex lg:flex-row flex-col max-container">
+          <section className="relative flex sm:flex-col xl:flex-row md:flex-col  max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)];">
             {alert.show && <Alert {...alert} />}
 
             <div className="flex-1 min-w-[50%] flex flex-col">
-              <h1 className="head-text">Get your space suit ready</h1>
+              <h1 className="sm:text-5xl text-3xl font-semibold sm:leading-snug;">Get in touch</h1>
               <form
                 className="w-full flex flex-col gap-7 mt-14"
                 onSubmit={handleSubmit}
@@ -172,11 +170,11 @@ const Contact = () => {
                 />
 
                 <Suspense fallback={<Loader />}>
-                  <Fox
+                  <Fox className="sm:scale-0.3"
                     currentAnimation={currentAnimation}
                     position={[0.5, 0.35, 0]}
                     rotation={[12.6, -0.6, 0]}
-                    scale={[0.55, 0.55, 0.55]}
+                    scale={[0.5, 0.5, 0.5]}
                   />
                 </Suspense>
               </Canvas>
