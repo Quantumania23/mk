@@ -6,7 +6,7 @@ import Contact from "@/Components/Contacts";
 import { LinkArrow } from "@/Components/Icons";
 import Head from "next/head";
 import Image from "next/image";
-import profilePic from "../../public/images/profile/image-75-74-removebg-preview.png";
+import profilePic from "../../public/images/profile/image-75-74-removebg.png";
 import AnimatedText from "@/Components/AnimatedText";
 import HireMe from "@/Components/HireMe";
 import lightBulb from "../../public/images/svgs/bulb.png";
