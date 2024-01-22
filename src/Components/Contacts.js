@@ -1,105 +1,138 @@
-import React, { useState } from 'react';
-import { BsX } from 'react-icons/bs';
-import AnimatedText from './AnimatedText';
+import { useRef, useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import Alert from "@/Components/Alert";
+import Loader from "@/Components/Loader";
+import UseAlert from "@/Components/Hooks/UseAlert";
 
-const PopupContent = ({ handleClose }) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+const Contact = ({ handleClose }) => {
+  const formRef = useRef(null);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [isLoading, setisLoading] = useState(false);
+  const { alert, showAlert, hideAlert } = UseAlert();
 
-  const [submissionStatus, setSubmissionStatus] = useState(null);
+  useEffect(() => {
+    // Optionally, you can add some delay before automatically showing the popup
+    // setTimeout(() => {
+    //   setShowPopup(true);
+    // }, 2000);
+  }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setisLoading(true);
 
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          'Content-Type': "application/json",
+    emailjs
+      .send(
+        'service_rfb2t5f',
+        'template_gjgq5ws',
+        {
+          from_name: form.name,
+          to_name: "Mike",
+          from_email: form.email,
+          to_email: "mikepeace981@gmail.com",
+          message: form.message,
         },
-        body: JSON.stringify(formData),
-      });
+        '4tI8_x0TkJqchDXxg',
+      )
+      .then(() => {
+        setisLoading(false);
+        showAlert({
+          show: true,
+          text: "Message sent successfully 😃!",
+          type: "success",
+        });
 
-      if (response.ok) {
-        setSubmissionStatus("success");
-        setFormData({ name: '', email: '', subject: '', message: '' });
-        // Optionally, you can reset the form data here: setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmissionStatus("er ror");
-        console.error("Form submission failed:", response.statusText);
-      }
-    } catch (error) {
-      setSubmissionStatus("error");
-      console.error("Error submitting form:", error.message);
-    }
+        setTimeout(() => {
+          hideAlert();
+          setForm({ name: "", email: "", message: "" });
+          handleClose();
+        }, 3000);
+      })
+      .catch((error) => {
+        setisLoading(false);
+        console.log(error);
+
+        showAlert({
+          show: true,
+          text: "I did not receive your message 😢",
+          type: "danger",
+        });
+      });
   };
+
+  const handleFocus = () => {};
+  const handleBlur = () => {};
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
-      <div className="fixed inset-0 bg-black opacity-50"></div>
-      <div className="relative z-20 bg-white p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out">
-        <div className="flex justify-end">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white w-3/4 md:w-2/3 lg:w-1/2 p-8 rounded-lg relative">
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4 text-xl cursor-pointer focus:outline-none"
+        >
+          X
+        </button>
+        {alert.show && <Alert {...alert} />}
+
+        <form className="w-full flex flex-col gap-7 mt-4" onSubmit={handleSubmit} ref={formRef}>
+          <label className="text-black-500 font-semibold">
+            Name
+            <input
+              type="text"
+              name="name"
+              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card"
+              placeholder="John"
+              required
+              value={form.name}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </label>
+          <label className="text-black-500 font-semibold">
+            Email
+            <input
+              type="email"
+              name="email"
+              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-2.5 font-normal shadow-card"
+              placeholder="johndoe@gmail.com"
+              required
+              value={form.email}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </label>
+          <label className="text-black-500 font-semibold">
+            Your Message
+            <textarea
+              name="message"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-200 focus:ring-blue-500 focus:border-blue-500 mt-2.5 font-normal shadow-card"
+              placeholder="Let me know how I can help you"
+              required
+              rows="4"
+              value={form.message}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </label>
+
           <button
-            onClick={handleClose}
-            className="text-gray-500 hover:text-gray-700 transition-all duration-300 ease-in-out"
+            type="submit"
+            className="text-white bg-gradient-to-r from-[#00c6ff] to-[#0072ff] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            disabled={isLoading}
           >
-            <BsX size={24} />
+            {isLoading ? "Sending..." : "Cognize"}
           </button>
-        </div>
-        <AnimatedText
-          text={submissionStatus === "success" ? "Thank you for contacting me!" : "Need a project done or looking for a dev? I'm just a few keystrokes away"}
-          className="!text-sm !text-black !flex !flex-wrap !mb-4"
-        />
-        {submissionStatus === "success" ? (
-          <p className="text-green-500">I&apos;ll get back to you as soon as possible.</p>
-        ) : (
-          <>
-          <form action="https://formsubmit.com/mikepeace981@gmail.com" method="POST" 
-         className="flex flex-col gap-6 mt-0" onSubmit={handleSubmit}>
-        <div className="grid flex-wrap grid-cols-1 gap-2">
-          <input type="text" placeholder="Full Name..." 
-          required
-          className="border" />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            required
-            className="border"
-          />
-          <input type="hidden" name="_subject" value="new" />
-        </div>
-        
-        <textarea
-        className="border"
-          name=""
-          id=""
-          cols="3"
-          rows="3"
-          placeholder="Your Message"
-        ></textarea>
-        <input type="submit" value="Cognize now" className="cursor-pointer mt-4 bg-blue-500 text-white px-4 py-2 rounded-md"/>
-        <input
-          type="hidden"
-          name="_next"
-          value="https://mk-eta.vercel"
-        />
-      </form>
-            {submissionStatus === "error" && <p className="text-red-500">Form submission failed. Please try again later.</p>}
-          </>
-        )}
+        </form>
       </div>
     </div>
   );
 };
 
-export default PopupContent;
+export default Contact;

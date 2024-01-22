@@ -8,9 +8,8 @@ import { fadeIn } from "../../Variants";
 import { motion } from "framer-motion";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import 'react-vertical-timeline-component/style.min.css'
-import Image from "next/image";
 import { RxCrop, RxPencil2, RxReader, RxRocket, RxCamera, RxCode } from "react-icons/rx";
-import CTA from "@/Components/CTA";
+
 
 
 // data
@@ -165,7 +164,7 @@ const Services = () => {
           </div>
           <hr className="border-slate-200"/>
 
-            <CTA/>
+            
         </Layout>
       </main>
     </>

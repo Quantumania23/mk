@@ -28,8 +28,8 @@ const Contact = () => {
     setCurrentAnimation("hit");
 
     emailjs.send(
-        process.env.NEXT_APP_EMAILJS_SERVICE_ID,
-        process.env.NEXT_APP_EMAILJS_TEMPLATE_ID,
+        'service_rfb2t5f',
+        'template_gjgq5ws',
         {
           from_name: form.name,
           to_name: "Mike",
@@ -37,7 +37,7 @@ const Contact = () => {
           to_email: "mikepeace981@gmail.com",
           message: form.message,
         },
-        process.env.NEXT_APP_EMAILJS_PUBLIC_KEY,
+        '4tI8_x0TkJqchDXxg',
       )
       .then(() => {
         setisLoading(false);
