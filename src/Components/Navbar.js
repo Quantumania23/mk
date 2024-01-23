@@ -77,7 +77,7 @@ const Navbar = () => {
     >
     {/* <TopLeftImg className="dark:bg-dark mix-blend-color-dodge"/> */}
       <button
-        className="flex-col justify-center items-center hidden lg:flex" onClick={handleClick}>
+        className="flex-col justify-center items-center hidden xl:flex" onClick={handleClick}>
         <span
           className={`bg-dark dark:bg-light block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'
           }`}
@@ -92,7 +92,7 @@ const Navbar = () => {
         ></span>
       </button>
 
-      <div className="w-full flex justify-between items-center lg:hidden">
+      <div className="w-full flex justify-between items-center xl:hidden">
         <nav>
           <CustomLink href="/" title="Home" className="mr-2" />
           <CustomLink href="/About" title="About" className="mx-2" />
